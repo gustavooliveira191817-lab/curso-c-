@@ -1,0 +1,110 @@
+using System;
+using System.Collections.Generic;
+
+public class Moto
+{
+    public string Marca { get; set; }
+
+    public string Modelo { get; set; }
+
+    public int Ano { get; set; }
+}
+public class Projeto1
+{
+static void CadastrarMoto(List<Moto> motos)
+{
+    Console.WriteLine("informe a marca da moto");
+        string marca = Console.ReadLine();
+
+        Console.WriteLine("informe o modelo da moto");
+        string modelo = Console.ReadLine();
+
+        Console.WriteLine("informe o ano da moto");
+        int ano = int.Parse(Console.ReadLine());
+
+        Moto m1 = new Moto();
+
+          m1.Marca = marca;
+          m1.Modelo = modelo;
+          m1.Ano = ano;
+            motos.Add(m1);
+}
+static void ListarMoto(List<Moto> motos){
+    for ( int i = 0; i < motos.Count;i++){
+                Console.WriteLine("marca: "+ motos[i].Marca);
+                Console.WriteLine("modelo: "+ motos[i].Modelo);
+                Console.WriteLine("ano: "+ motos[i].Ano); 
+                }
+                if (motos.Count == 0 ){
+                    Console.WriteLine("nehuma moto cadastrada");
+                }
+
+}
+static void BuscarMoto(List<Moto>motos){
+
+    bool encontrou = false;
+    Console.WriteLine("informe a moto que deseja buscar");
+   string Buscarmoto = Console.ReadLine();
+  
+  for (int i = 0; i < motos.Count; i++)
+{
+    if (Buscarmoto == motos[i].Modelo ){
+
+        encontrou = true;
+
+                Console.WriteLine("marca: "+ motos[i].Marca);
+                Console.WriteLine("modelo: "+ motos[i].Modelo);
+                Console.WriteLine("ano: "+ motos[i].Ano);
+        }
+}
+    if (encontrou == false)
+        {
+            Console.WriteLine("nenhuma moto encontrada");
+        }
+}
+
+    public static void Main(string[] args)
+    {
+        List<Moto> motos = new List<Moto>();
+
+        int opcao;
+       do{
+
+    Console.WriteLine("===== SISTEMA DE MOTOS =====");
+    Console.WriteLine("1 - Cadastrar moto");
+    Console.WriteLine("2 - Listar motos");
+    Console.WriteLine("3 - buscar moto");
+    Console.WriteLine("4 - Sair");
+    Console.WriteLine("======================");
+
+    Console.WriteLine("escolha uma opção");
+    opcao = int.Parse(Console.ReadLine());
+
+            switch (opcao) {
+
+        case 1: 
+        CadastrarMoto(motos);
+
+        break;
+
+
+        case 2:
+        ListarMoto(motos);
+     break;
+
+        case 3: 
+        BuscarMoto(motos);
+        break;
+
+            case 4:
+
+            Console.WriteLine("encerrando sistema");
+            break;
+
+            default:
+            Console.WriteLine("opção invalida");
+            break;
+            }
+    } while ( opcao != 4);
+}
+}
