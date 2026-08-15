@@ -11,6 +11,10 @@ public class Moto
 }
 public class Projeto1
 {
+    static int Quantidade(List<Moto>motos){
+        return motos.Count;
+    }
+    
 static void CadastrarMoto(List<Moto> motos)
 {
     Console.WriteLine("informe a marca da moto");
@@ -89,6 +93,9 @@ static void BuscarMoto(List<Moto>motos){
 
 
         case 2:
+        int quantidade = Quantidade(motos);
+        Console.WriteLine("quantidade de motos: "+quantidade);
+
         ListarMoto(motos);
      break;
 
