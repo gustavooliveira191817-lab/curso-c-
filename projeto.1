@@ -126,7 +126,40 @@ bool encontrou = false;
         
 }
 #endregion
+static void ListarServicos(List<Moto> motos, List<Servico> servicos){
+    for ( int i = 0; i < servicos.Count;i++){
+                Console.WriteLine ("ID: "+ servicos[i].MotoID);
+                Console.WriteLine("serviço: "+ servicos[i].servico);
+                Console.WriteLine("valor: R$"+ servicos[i].preco);
+                
+                }
+                if (servicos.Count == 0 ){
+                    Console.WriteLine("nenhum serviço encontrado");
+                }
 
+}
+static void BuscarServico (List<Moto> motos, List<Servico> servicos){
+
+     bool encontrou = false;
+    Console.WriteLine("informe o ID da  moto que deseja buscar");
+   int Buscarservico = int.Parse(Console.ReadLine());
+  
+  for (int i = 0; i < servicos.Count; i++)
+{
+    if (Buscarservico == servicos[i].MotoID ){
+
+        encontrou = true;
+
+                
+                Console.WriteLine("serviço: "+ servicos[i].servico);
+                Console.WriteLine("Preço: R$"+ servicos[i].preco);
+        }
+}
+    if (encontrou == false)
+        {
+            Console.WriteLine("nenhuma moto encontrada");
+        }
+}
     public static void Main(string[] args)
     {
         List<Moto> motos = new List<Moto>();
@@ -140,7 +173,9 @@ bool encontrou = false;
     Console.WriteLine("2 - Listar motos");
     Console.WriteLine("3 - buscar moto");
     Console.WriteLine("4 - Novo serviço");
-    Console.WriteLine("5 - Sair");
+    Console.WriteLine("5 - listar serviços");
+    Console.WriteLine("6 - buscar serviço");
+    Console.WriteLine("7 - sair");
     Console.WriteLine("======================");
 
     Console.WriteLine("escolha uma opção");
@@ -172,6 +207,16 @@ bool encontrou = false;
             break;
 
             case 5:
+            ListarServicos(motos,  servicos);
+
+            break;
+
+            case 6:
+            BuscarServico(motos, servicos);
+            
+            break;
+
+            case 7:
            
             Console.WriteLine("encerrando sistema");
             break;
@@ -180,6 +225,6 @@ bool encontrou = false;
             Console.WriteLine("opção invalida");
             break;
             }
-    } while ( opcao != 5);
+    } while ( opcao != 7);
 }
 }
