@@ -1,0 +1,182 @@
+import java.util.List;
+import java.util.Scanner;
+import java.util.Random;
+import java.util.ArrayList;
+
+
+ class Moto
+{
+    int ID;
+    String Marca;
+    String Modelo;
+    int Ano;
+}
+class Servico
+{
+    int MotoID;
+    String servico;
+    double Preco;
+}
+
+public class Main {
+    static int proximoID = 1;
+    static Scanner sc = new Scanner(System.in);
+
+     static void CadastraMoto(List<Moto>moto){
+
+
+         Random rm = new Random();
+         Moto m1 = new Moto();
+
+
+
+         System.out.println("infome a marca da moto");
+         String moto1 = sc.nextLine();
+
+         sc.nextLine();
+         System.out.println("informe o modelo");
+         String modelo = sc.nextLine();
+
+         System.out.println("informe o ano");
+         int ano  = sc.nextInt();
+         m1.ID = proximoID;
+         proximoID++;
+         m1.Marca =  moto1;
+         m1.Modelo = modelo;
+         m1.Ano = ano;
+
+         moto.add(m1);
+
+         System.out.println("o ID de cadastro é : "+m1.ID);
+
+     }
+        static void ListarMoto(List<Moto>moto) {
+
+            if (moto.size()==0){
+                System.out.println("nenhuma moto cadastrada ");
+            }
+
+         for (int i = 0; i<moto.size();i++){
+             System.out.println("ID: "+ moto.get(i).ID);
+             System.out.println("Marca: "+ moto.get(i).Marca);
+             System.out.println("Modelo: "+ moto.get(i).Modelo);
+             System.out.println("Ano: "+ moto.get(i).Ano);
+             System.out.println("===================");
+
+         }
+
+    }
+    static void BuscarMoto(List<Moto>moto){
+
+         boolean encontrou  = true;
+
+         System.out.println("Informe o ID da moto");
+         int id = sc.nextInt();
+
+        for (int i = 0; i<moto.size();i++){
+            if(id == moto.get(i).ID){
+
+                System.out.println("Marca: "+ moto.get(i).Marca);
+                System.out.println("Modelo: "+ moto.get(i).Modelo);
+                System.out.println("Ano: "+ moto.get(i).Ano);
+            }
+        }if(encontrou == false) {
+            System.out.println("nenhuma moto encontrada");
+
+}
+    }
+    static void CadastrarServico(List<Moto>moto, List<Servico>servico) {
+        Servico s1 = new Servico();
+        boolean encontrou  = false;
+
+
+        System.out.println("informe o ID da moto");
+        int id = sc.nextInt();
+        for (int i = 0; i < moto.size(); i++) {
+
+            if (id == moto.get(i).ID){
+
+                 encontrou  = true;
+
+                System.out.println("descreva o serviço");
+                String ordem = sc.nextLine();
+
+                System.out.printf(" informe o preco");
+                double preco = sc.nextDouble();
+
+                s1.MotoID = id;
+                s1.servico = ordem;
+                s1.Preco = preco;
+
+                servico.add(s1);
+            }
+        } if (!encontrou){
+            System.out.println("nenhuma moto encontrada");
+        }
+
+    }
+    static void BuscarServicos(List<Moto>moto, List<Servico>sevico){
+         boolean encontrou = false;
+
+         System.out.println("informe o id da moto");
+         int id = sc.nextInt();
+
+         for(int i = 0; i< moto.size();i++){
+             if (id == moto.get(i).ID){
+                  encontrou = true;
+
+
+                 System.out.println("Modelo: "+ moto.get(i).Modelo);
+                 System.out.println("              ");
+                 System.out.println("Servico: "+ sevico.get(i).servico);
+                 System.out.printf("Preço: %.2f% "+sevico.get(i).Preco);
+             }
+         }if (!encontrou){
+             System.out.println("NENHUMA MOTO ENCONTRADA");
+        }
+    }
+    public static void main(String[] args) {
+         ArrayList<Servico> servico = new ArrayList<>();
+         ArrayList<Moto> moto = new ArrayList<>();
+
+         int opcao ;
+
+         do {
+
+
+             System.out.println("===== SISTEMA DE MOTOS =====");
+             System.out.println("1 - Cadastrar moto");
+             System.out.println("2 - Listar motos");
+             System.out.println("3 - buscar moto");
+             System.out.println("4 - Novo serviço");
+             System.out.println("5 - listar serviços");
+             System.out.println("6 - buscar serviço");
+             System.out.println("7 - sair");
+             System.out.println("======================");
+
+             System.out.println("escolha uma opção");
+             opcao = sc.nextInt();
+
+             switch (opcao) {
+
+                 case 1:
+                 CadastraMoto(moto);
+                 break;
+
+                 case 2:
+                     ListarMoto(moto);
+                     break;
+                 case 3:
+                     BuscarMoto(moto);
+                     break;
+                 case 4:
+                     CadastrarServico(moto,servico);
+                     break;
+                 case 5:
+                     BuscarServicos(moto,servico);
+                     break;
+             }
+         }while (opcao != 7);
+    }
+}
+
